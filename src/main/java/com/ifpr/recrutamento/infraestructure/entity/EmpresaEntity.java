@@ -12,7 +12,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "empresa")
-public class Empresa {
+public class EmpresaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +36,8 @@ public class Empresa {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToMany(mappedBy = "empresa")
-    private Set<Recrutador> recrutadores;
+    @OneToMany(mappedBy = "empresaEntity")
+    private Set<RecrutadorEntity> recrutadores;
 
 
 }

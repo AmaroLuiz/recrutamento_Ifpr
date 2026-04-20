@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "objetivo_profissional")
-public class ObjetivoProfissional {
+public class ObjetivoProfissionalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +18,13 @@ public class ObjetivoProfissional {
 
     @OneToOne
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false, unique = true)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @Column(name = "faculdade_desejada", length = 150)
     private String faculdadeDesejada;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_vaga_id", referencedColumnName = "id", nullable = false)
-    private TipoVaga tipoVaga;
+    private TipoVagaEntity tipoVagaEntity;
 
 }

@@ -13,19 +13,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "aluno_tipo_vaga")
-public class AlunoTipoVaga {
+public class AlunoTipoVagaEntity {
 
     @EmbeddedId
-    private AlunoTipoVagaId id;
+    private AlunoTipoVagaIdEntity id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("alunoId")
     @JoinColumn(name = "aluno_id", nullable = false)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("tipoVagaId")
     @JoinColumn(name = "tipo_vaga_id", nullable = false)
-    private TipoVaga tipoVaga;
+    private TipoVagaEntity tipoVagaEntity;
 
 }

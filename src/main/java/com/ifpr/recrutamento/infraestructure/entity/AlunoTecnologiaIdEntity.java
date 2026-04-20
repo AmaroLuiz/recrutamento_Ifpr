@@ -1,13 +1,12 @@
 package com.ifpr.recrutamento.infraestructure.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class AlunoTecnologiaId implements Serializable {
+public class AlunoTecnologiaIdEntity implements Serializable {
 
     private Long alunoId;
     private Long tecnologiaId;
@@ -15,8 +14,8 @@ public class AlunoTecnologiaId implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AlunoTecnologiaId)) return false;
-        AlunoTecnologiaId that = (AlunoTecnologiaId) o;
+        if (!(o instanceof AlunoTecnologiaIdEntity)) return false;
+        AlunoTecnologiaIdEntity that = (AlunoTecnologiaIdEntity) o;
         return Objects.equals(alunoId, that.alunoId) &&
                 Objects.equals(tecnologiaId, that.tecnologiaId);
     }
