@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -13,7 +12,7 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "certificado")
-public class Certificado {
+public class CertificadoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +20,7 @@ public class Certificado {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @Column(name = "nome_certificado", length = 150, nullable = false)
     private String nomeCertificado;
