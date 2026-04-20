@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "recrutador")
-public class Recrutador {
+public class RecrutadorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Recrutador {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empresa_id",referencedColumnName = "id",nullable = false)
-    private Empresa empresa;
+    private EmpresaEntity empresaEntity;
 
 
 }

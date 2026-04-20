@@ -10,21 +10,21 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "aluno_tecnologia")
-public class AlunoTecnologia {
+public class AlunoTecnologiaEntity {
 
 
     @EmbeddedId
-    private AlunoTecnologiaId id;
+    private AlunoTecnologiaIdEntity id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("alunoId")
     @JoinColumn(name = "aluno_id", nullable = false)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("tecnologiaId")
     @JoinColumn(name = "tecnologia_id", nullable = false)
-    private Tecnologia tecnologia;
+    private TecnologiaEntity tecnologiaEntity;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "nivel", nullable = false)

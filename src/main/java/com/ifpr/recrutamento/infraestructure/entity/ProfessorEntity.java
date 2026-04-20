@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,7 +14,7 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "professor")
-public class Professor {
+public class ProfessorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +38,7 @@ public class Professor {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campus_id",referencedColumnName = "id", nullable = false)
-    private Campus campus;
+    private CampusEntity campus;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cargo")

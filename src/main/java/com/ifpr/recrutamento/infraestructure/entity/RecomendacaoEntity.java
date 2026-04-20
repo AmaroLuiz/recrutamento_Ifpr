@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "recomendacao")
-public class Recomendacao {
+public class RecomendacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class Recomendacao {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "professor_id", referencedColumnName = "id", nullable = false)
-    private Professor professor;
+    private ProfessorEntity professorEntity;
 
     @Column(name = "descricao")
     private String descricao;

@@ -1,9 +1,9 @@
 package com.ifpr.recrutamento.infraestructure.repository;
 
-import com.ifpr.recrutamento.infraestructure.entity.Tecnologia;
+import com.ifpr.recrutamento.infraestructure.entity.TecnologiaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TecnologiaRepository extends JpaRepository<Tecnologia, Long> {
+public interface TecnologiaRepository extends JpaRepository<TecnologiaEntity, Long> {
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Builder
 @Table(name = "experiencia")
-public class Experiencia {
+public class ExperienciaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Experiencia {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
-    private Aluno aluno;
+    private AlunoEntity alunoEntity;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)

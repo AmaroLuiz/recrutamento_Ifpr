@@ -4,24 +4,20 @@ import com.ifpr.recrutamento.infraestructure.enums.EstadoEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "campus",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"nome", "cidade", "estado" })
-)
-public class Campus {
+@Table(name = "campus")
+public class CampusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome",length = 2, nullable = false)
+    @Column(name = "nome",length = 150, nullable = false)
     private String nome;
 
     @Column(name = "cidade",length = 150, nullable = false)
