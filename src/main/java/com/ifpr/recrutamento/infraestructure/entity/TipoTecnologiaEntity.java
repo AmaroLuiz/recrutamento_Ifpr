@@ -5,10 +5,10 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "tipo_tecnologia")
 
 public class TipoTecnologiaEntity {
@@ -17,6 +17,7 @@ public class TipoTecnologiaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome",length = 50, nullable = false, unique = true)
+    @Column(name = "nome", length = 50,nullable = false)
     private String nome;
+
 }

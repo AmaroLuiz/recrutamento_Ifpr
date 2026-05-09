@@ -1,9 +1,0 @@
-package com.ifpr.recrutamento.infraestructure.repository;
-
-import com.ifpr.recrutamento.infraestructure.entity.AlunoTipoVagaEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface AlunoTipoVagaRepository extends JpaRepository<AlunoTipoVagaEntity, Long> {
-}

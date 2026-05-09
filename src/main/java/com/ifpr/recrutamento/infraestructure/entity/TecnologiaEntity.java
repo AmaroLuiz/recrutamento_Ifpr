@@ -19,10 +19,6 @@ public class TecnologiaEntity {
     @Column(name = "nome", length = 100, nullable = false, unique = true)
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_id", referencedColumnName = "id")
-    private TipoTecnologiaEntity tipoTecnologiaEntity;
-
-
-
+    @Column(name = "tipo_id", nullable = false)
+    private Long tipoId;
 }

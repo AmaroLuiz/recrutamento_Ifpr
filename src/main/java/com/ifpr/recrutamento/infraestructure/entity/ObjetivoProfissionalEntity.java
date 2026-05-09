@@ -23,8 +23,6 @@ public class ObjetivoProfissionalEntity {
     @Column(name = "faculdade_desejada", length = 150)
     private String faculdadeDesejada;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_vaga_id", referencedColumnName = "id", nullable = false)
-    private TipoVagaEntity tipoVagaEntity;
-
+    @Column(name = "descricao", length = 300)
+    private String descricao;
 }

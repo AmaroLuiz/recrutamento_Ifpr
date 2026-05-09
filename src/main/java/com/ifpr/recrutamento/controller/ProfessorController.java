@@ -20,9 +20,6 @@ public class ProfessorController {
         return ResponseEntity.ok(professorService.salvaProfessor(professorDTO));
     }
 
-    @PostMapping("/login")
-
-
     @GetMapping
     public ResponseEntity<ProfessorDTO> buscarProfessorPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(professorService.buscarProfessorPorEmail(email));

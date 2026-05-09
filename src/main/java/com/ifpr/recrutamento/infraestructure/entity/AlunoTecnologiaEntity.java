@@ -9,34 +9,29 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "aluno_tecnologia")
+@Builder
+@Table(name = "aluno_tecnologia",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"aluno_id", "tecnologia_id"})
+)
 public class AlunoTecnologiaEntity {
 
 
-    @EmbeddedId
-    private AlunoTecnologiaIdEntity id;
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("alunoId")
     @JoinColumn(name = "aluno_id", nullable = false)
-    private AlunoEntity alunoEntity;
+    private AlunoEntity alunoId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("tecnologiaId")
     @JoinColumn(name = "tecnologia_id", nullable = false)
-    private TecnologiaEntity tecnologiaEntity;
+    private TecnologiaEntity tecnologiaId;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "nivel", nullable = false)
     private NivelTecnologiaEnum nivel;
-
-//Sem LAZY:
-//Hibernate usa EAGER por padrão em ManyToOne
-//Isso gera:
-//carregamento desnecessário
-//perda de performance
-//possível efeito cascata em queries
-
 
 
 

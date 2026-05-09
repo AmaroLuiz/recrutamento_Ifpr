@@ -8,6 +8,7 @@ import com.ifpr.recrutamento.infraestructure.exceptions.ConflictException;
 import com.ifpr.recrutamento.infraestructure.exceptions.ResourceNotFoundException;
 import com.ifpr.recrutamento.infraestructure.repository.ProfessorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,9 +17,11 @@ public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
     private final ProfessorConverter professorConverter;
+    private final PasswordEncoder passwordEncoder;
 
     public ProfessorDTO salvaProfessor(ProfessorDTO professorDTO){
         emailExist(professorDTO.getEmailInstitucional());
+        professorDTO.setSenhaHash(passwordEncoder.encode(professorDTO.getSenhaHash()));
         ProfessorEntity professorEntity = professorConverter.paraProfessor(professorDTO);
         return professorConverter.paraProfessorDTO(
                 professorRepository.save(professorEntity)
