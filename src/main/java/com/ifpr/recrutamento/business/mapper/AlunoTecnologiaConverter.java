@@ -9,8 +9,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface AlunoTecnologiaConverter {
 
-    @Mapping(target = "alunoId", source = "alunoId")
-    @Mapping(target = "tecnologiaId", source = "tecnologiaId")
+    @Mapping(target = "alunoId", source = "alunoId.id")
+    @Mapping(target = "tecnologia.id", source = "tecnologiaId.id")
+    @Mapping(target = "tecnologia.nome", source = "tecnologiaId.nome")
     @Mapping(target = "nivel", source = "nivel")
     AlunoTecnologiaDTO paraTecnologiaDTO(AlunoTecnologiaEntity dto);
 

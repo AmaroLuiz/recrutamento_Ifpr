@@ -2,6 +2,7 @@ package com.ifpr.recrutamento.business;
 
 import com.ifpr.recrutamento.business.dto.AlunoTecnologiaDTO;
 import com.ifpr.recrutamento.business.dto.TecnologiaDTO;
+import com.ifpr.recrutamento.business.dto.TecnologiaResumoDTO;
 import com.ifpr.recrutamento.business.mapper.AlunoTecnologiaConverter;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoEntity;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoTecnologiaEntity;
@@ -36,10 +37,10 @@ public class AlunoTecnologiaService {
         AlunoEntity aluno = alunoRepository.findById(alunoId).orElseThrow(
                 () -> new ResourceNotFoundException("Aluno não encontrado " + alunoId));
 
-        Long id = dto.getTecnologiaId().getId();
+        Long id = dto.getTecnologia().getId();
 
         TecnologiaEntity tecnologia = tecnologiaRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Tecnologia não encontrada " + dto.getTecnologiaId()));
+                () -> new ResourceNotFoundException("Tecnologia não encontrada " + dto.getTecnologia()));
 
         AlunoTecnologiaEntity entity = AlunoTecnologiaEntity.builder()
                 .alunoId(aluno)
@@ -74,4 +75,4 @@ public class AlunoTecnologiaService {
 
 }
 
-// arrumar o findbyemail por id e começar a verificar se a lógica usada vai funcionar
+
