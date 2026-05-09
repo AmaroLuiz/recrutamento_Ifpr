@@ -1,6 +1,7 @@
 package com.ifpr.recrutamento.infraestructure.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -16,31 +17,34 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "aluno")
-public class Aluno {
+public class AlunoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "senha_hash", nullable = false)
-    private String senhaHash;
-
     @Column(name = "nome_completo", length = 150, nullable = false)
     private String nomeCompleto;
 
+    @Column(name = "cpf", length = 14, nullable = false)
+    private String cpf;
+
     @Column(name = "email_institucional", length = 150, nullable = false, unique = true )
     private String emailInstitucional;
+
+    @Column(name = "senha_hash", nullable = false)
+    private String senhaHash;
 
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campus_id", referencedColumnName = "id")
-    private Campus campus;
+    private CampusEntity campusEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id", referencedColumnName = "id", nullable = false)
-    private Curso curso;
+    private CursoEntity cursoEntity;
 
 
     @Column(name = "ativo_na_instituicao", nullable = false)
@@ -60,7 +64,6 @@ public class Aluno {
     @Column(name = "ativo_em_projetos")
     private Boolean ativoEmProjetos;
 
-    @Lob
     @Column(name = "curriculo_pdf", columnDefinition = "TEXT")
     private String curriculoPDF;
 
@@ -76,10 +79,5 @@ public class Aluno {
             ativoEmProjetos = false;
         }
     }
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Certificado> certificados = new ArrayList<>();
-
-
-
 
 }

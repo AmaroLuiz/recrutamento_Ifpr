@@ -9,20 +9,15 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "tecnologia")
-public class Tecnologia {
+@Table(name = "tipo_tecnologia")
+
+public class TipoTecnologiaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", length = 100, nullable = false, unique = true)
+    @Column(name = "nome", length = 50,nullable = false)
     private String nome;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_id", referencedColumnName = "id")
-    private TipoTecnologia tipoTecnologia;
-
-
 
 }

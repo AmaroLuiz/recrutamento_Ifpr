@@ -5,18 +5,20 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @Entity
-@Table(name = "tipo_tecnologia")
-
-public class TipoTecnologia {
+@Builder
+@Table(name = "tecnologia")
+public class TecnologiaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome",length = 50, nullable = false, unique = true)
+    @Column(name = "nome", length = 100, nullable = false, unique = true)
     private String nome;
+
+    @Column(name = "tipo_id", nullable = false)
+    private Long tipoId;
 }
