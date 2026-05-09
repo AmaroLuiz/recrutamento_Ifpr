@@ -1,12 +1,10 @@
 package com.ifpr.recrutamento.business.dto;
 
 import com.ifpr.recrutamento.infraestructure.entity.CampusEntity;
-import com.ifpr.recrutamento.infraestructure.entity.CertificadoEntity;
 import com.ifpr.recrutamento.infraestructure.entity.CursoEntity;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,7 +14,9 @@ import java.util.List;
 @Builder
 public class AlunoDTO {
 
+    private Long id;
     private String nomeCompleto;
+    private String cpf;
     private String emailInstitucional;
     private String senhaHash;
     private LocalDate dataNascimento;
@@ -28,6 +28,6 @@ public class AlunoDTO {
     private Boolean indicadoPorProfessor;
     private Boolean ativoEmProjetos;
     private String curriculoPDF;
-    private List<CertificadoDTO> certificado;
+
 
 }

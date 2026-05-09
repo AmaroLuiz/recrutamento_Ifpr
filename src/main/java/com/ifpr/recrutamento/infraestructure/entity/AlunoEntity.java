@@ -1,6 +1,7 @@
 package com.ifpr.recrutamento.infraestructure.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -24,6 +25,9 @@ public class AlunoEntity {
 
     @Column(name = "nome_completo", length = 150, nullable = false)
     private String nomeCompleto;
+
+    @Column(name = "cpf", length = 14, nullable = false)
+    private String cpf;
 
     @Column(name = "email_institucional", length = 150, nullable = false, unique = true )
     private String emailInstitucional;
@@ -75,10 +79,5 @@ public class AlunoEntity {
             ativoEmProjetos = false;
         }
     }
-    @OneToMany(mappedBy = "alunoEntity")
-    private List<CertificadoEntity> certificados;
-
-
-
 
 }

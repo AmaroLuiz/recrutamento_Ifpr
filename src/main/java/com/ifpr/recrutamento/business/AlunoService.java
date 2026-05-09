@@ -1,15 +1,14 @@
 package com.ifpr.recrutamento.business;
 
 import com.ifpr.recrutamento.business.dto.AlunoDTO;
-import com.ifpr.recrutamento.business.dto.ProfessorDTO;
 import com.ifpr.recrutamento.business.mapper.AlunoConverter;
-import com.ifpr.recrutamento.business.mapper.ProfessorConverter;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoEntity;
 import com.ifpr.recrutamento.infraestructure.exceptions.ConflictException;
 import com.ifpr.recrutamento.infraestructure.exceptions.ResourceNotFoundException;
 import com.ifpr.recrutamento.infraestructure.repository.AlunoRepository;
-import com.ifpr.recrutamento.infraestructure.repository.ProfessorRepository;
+import com.ifpr.recrutamento.infraestructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,9 +17,13 @@ public class AlunoService {
 
     private final AlunoRepository alunoRepository;
     private final AlunoConverter alunoConverter;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+
 
     public AlunoDTO salvaAluno(AlunoDTO alunoDTO){
         emailExist(alunoDTO.getEmailInstitucional());
+        alunoDTO.setSenhaHash(passwordEncoder.encode(alunoDTO.getSenhaHash()));
         AlunoEntity alunoEntity = alunoConverter.paraAluno(alunoDTO);
         return alunoConverter.paraAlunoDTO(
                 alunoRepository.save(alunoEntity)
@@ -54,5 +57,23 @@ public class AlunoService {
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("email não encontrado" + email);
         }
+    }
+
+    public void deletaAlunoPorEmail(String email){
+        alunoRepository.deleteByEmailInstitucional(email);
+    }
+
+    public AlunoDTO atualizaDadosALuno(String token, AlunoDTO dto){
+
+        String email = jwtUtil.extrairIdToken(token.substring(7));
+
+        dto.setSenhaHash(dto.getSenhaHash() != null ? passwordEncoder.encode(dto.getSenhaHash()) : null);
+
+        AlunoEntity alunoEntity = alunoRepository.findByEmailInstitucional(email).orElseThrow(
+                () -> new ResourceNotFoundException("Email não encontrado" + email));
+
+        AlunoEntity aluno = alunoConverter.updateAluno(dto, alunoEntity);
+
+        return alunoConverter.paraAlunoDTO(alunoRepository.save(aluno));
     }
 }

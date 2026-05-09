@@ -13,12 +13,10 @@ import lombok.*;
 @Table(name = "campus")
 public class CampusEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "nome",length = 150, nullable = false)
-    private String nome;
 
     @Column(name = "cidade",length = 150, nullable = false)
     private String cidade;

@@ -16,6 +16,9 @@ public class RecrutadorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "cpf", length = 14, nullable = false)
+    private String cpf;
+
     @Column(name = "nome_completo", length = 150, nullable = false )
     private String nomeCompleto;
 

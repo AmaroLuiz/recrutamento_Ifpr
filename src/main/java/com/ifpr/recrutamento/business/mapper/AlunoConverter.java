@@ -3,7 +3,7 @@ package com.ifpr.recrutamento.business.mapper;
 
 import com.ifpr.recrutamento.business.dto.AlunoDTO;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoEntity;
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface AlunoConverter {
@@ -12,5 +12,7 @@ public interface AlunoConverter {
 
     AlunoDTO paraAlunoDTO(AlunoEntity alunoDTO);
 
-    AlunoDTO paraAlunoEntity(AlunoEntity entity);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    AlunoEntity updateAluno(AlunoDTO dto, @MappingTarget AlunoEntity entity);
+
 }
