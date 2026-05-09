@@ -13,8 +13,8 @@ import lombok.*;
 public class AlunoTecnologiaDTO {
 
     private Long id;
-    private AlunoEntity alunoId;
-    private TecnologiaEntity tecnologiaId;
+    private Long alunoId;
+    private TecnologiaResumoDTO tecnologia;
     private NivelTecnologiaEnum nivel;
 
 }

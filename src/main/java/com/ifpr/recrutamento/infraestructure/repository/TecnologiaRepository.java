@@ -1,5 +1,6 @@
 package com.ifpr.recrutamento.infraestructure.repository;
 
+import com.ifpr.recrutamento.business.dto.TecnologiaResumoDTO;
 import com.ifpr.recrutamento.infraestructure.entity.TecnologiaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,4 +12,5 @@ public interface TecnologiaRepository extends JpaRepository<TecnologiaEntity, Lo
 
     @Override
     Optional<TecnologiaEntity> findById(Long id);
+
 }
