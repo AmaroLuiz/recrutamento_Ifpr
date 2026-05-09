@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -81,6 +82,23 @@ public class AlunoController {
     public ResponseEntity<AlunoTecnologiaDTO> salvaTecnologia(@RequestBody AlunoTecnologiaDTO alunoTecnologiaDTO){
         return ResponseEntity.ok(alunoTecnologiaService.salvaTecnologiaAluno(alunoTecnologiaDTO));
     }
+    @GetMapping("/tecnologia")
+    public ResponseEntity<AlunoTecnologiaDTO> pesquisaTecnologiaPorAluno(@RequestParam("id") Long id){
+        return ResponseEntity.ok(alunoTecnologiaService.pesquisaTecnologiaPorAluno(id));
+    }
+
+    @GetMapping("/tecnologias")
+    public ResponseEntity<List<AlunoTecnologiaDTO>> listarTecnologiasAluno() {
+        return ResponseEntity.ok(alunoTecnologiaService.listarTecnologiasAluno());
+    }
+
+    @DeleteMapping("/tecnologia")
+    public ResponseEntity<Void> apagarTecnologia(@RequestParam("id") Long id){
+        alunoTecnologiaService.deletaTecnologiaPorId(id);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }
 

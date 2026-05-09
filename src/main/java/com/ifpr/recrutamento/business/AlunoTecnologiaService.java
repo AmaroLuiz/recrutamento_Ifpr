@@ -1,8 +1,6 @@
 package com.ifpr.recrutamento.business;
 
 import com.ifpr.recrutamento.business.dto.AlunoTecnologiaDTO;
-import com.ifpr.recrutamento.business.dto.TecnologiaDTO;
-import com.ifpr.recrutamento.business.dto.TecnologiaResumoDTO;
 import com.ifpr.recrutamento.business.mapper.AlunoTecnologiaConverter;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoEntity;
 import com.ifpr.recrutamento.infraestructure.entity.AlunoTecnologiaEntity;
@@ -16,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static java.lang.Long.parseLong;
 
@@ -55,22 +55,50 @@ public class AlunoTecnologiaService {
 
     }
 
-    public void idExiste(Long id){
+    public AlunoTecnologiaDTO pesquisaTecnologiaPorAluno(Long id){
+        try{
+            return alunoTecnologiaConverter.paraTecnologiaDTO(
+                    alunoTecnologiaRepository.findById(id).
+                            orElseThrow(
+                            () -> new ResourceNotFoundException("Tecnologia de aluno não encontrada" + id)));
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("Tecnologia de aluno não encontrada" + e);
+        }
+
+    }
+
+    public void idAlunoExiste(Long id){
         try {
 
-            boolean exist = verificaIdExistente(id);
+            boolean exist = verificaIdAlunoExistente(id);
 
             if(exist){
-                throw new ConflictException("Aluno já cadastrado");
+                throw new ConflictException("Aluno(a) já cadastrado");
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Aluno não cadastrado");
+            throw new RuntimeException("Aluno(a) não cadastrado");
         }
     }
 
-    public boolean verificaIdExistente(Long id){
+    public boolean verificaIdAlunoExistente(Long id){
         return alunoRepository.existsById(id);
+    }
+
+    public List<AlunoTecnologiaDTO> listarTecnologiasAluno() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Long alunoId = Long.parseLong(auth.getName());
+
+        List<AlunoTecnologiaEntity> tecnologias = alunoTecnologiaRepository.findByAlunoId_Id(alunoId);
+
+        return tecnologias.stream()
+                .map(alunoTecnologiaConverter::paraTecnologiaDTO)
+                .toList();
+    }
+
+    public void deletaTecnologiaPorId(Long id){
+        alunoTecnologiaRepository.deleteById(id);
     }
 
 }
